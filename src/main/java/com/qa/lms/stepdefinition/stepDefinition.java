@@ -73,12 +73,33 @@ public class stepDefinition {
 
     @And("Click on Login button")
     public void clickOnLoginButton() {
-        ispassed=false;
-        try{
-DriverAction.click(locator.loginButton);
-DriverAction.waitSec(5);
-        }catch (Exception ex){
-            ispassed=false;
+        ispassed = false;
+        try {
+            DriverAction.click(locator.loginButton);
+            DriverAction.waitSec(5);
+        } catch (Exception ex) {
+            ispassed = false;
         }
+    }
+
+    @Then("Verify if user is logged in")
+    public void verifyIfUserIsLoggedIn() {
+        ispassed = false;
+        try {
+            DriverAction.waitSec(5);
+            System.out.println(DriverAction.getElementsText(locator.homeDiv));
+            if (DriverAction.isExist(locator.avatar) && DriverAction.isExist(locator.searchIcon)
+                    && DriverAction.isExist(locator.progressDashboard))
+                ispassed = true;
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if user is logged in or not",
+                    " User is successfully logged in ",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if user is logged in or not",
+                    " User is unable to log in ", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }
