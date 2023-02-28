@@ -1,0 +1,16 @@
+{
+  "environment": "dev",
+  "projectName": "LMS",
+  "reportName": "LMS-Report",
+  "glueCode":"com.qa.lms.stepdefinition",
+  "dev": {
+    "browserName": "chrome",
+    "launchUrl": "https://geminisolutions.talentlms.com/index",
+    "browserTimeout": 100
+  },
+  "beta": {
+    "browserName": "chrome",
+    "launchUrl": "https://geminisolutions.talentlms.com/index",
+    "browserTimeout": 100
+  }
+}
