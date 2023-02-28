@@ -6,8 +6,8 @@ Feature:LMS
     When Enter "<userName>" and "<password>"
     And Click on Login button
     Examples:
-      | userName                             | password    |
-      | himanshu.panchal@geminisolutions.com | Killvibes@18 |
+      | userName                             | password |
+      | himanshu.panchal@geminisolutions.com |          |
 
 
 
