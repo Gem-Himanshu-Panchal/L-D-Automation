@@ -8,6 +8,11 @@ import com.gemini.generic.reporting.GemTestReporter;
 import com.gemini.generic.reporting.STATUS;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
+
+import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 public class stepDefinition {
     boolean ispassed = false;
@@ -101,5 +106,169 @@ public class stepDefinition {
         else
             GemTestReporter.addTestStep("Verify if user is logged in or not",
                     " User is unable to log in ", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if Gemini logo is present")
+    public void verify_if_gemini_logo_is_present() {
+        ispassed = false;
+        try {
+            DriverAction.waitSec(3);
+            ispassed = DriverAction.isExist(locator.avatar);
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if Gemini logo is present",
+                    "Gemini logo is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if Gemini logo is present",
+                    "Gemini logo is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if points header is present")
+    public void verify_if_points_header_is_present() {
+        ispassed = false;
+        try {
+
+            ispassed = DriverAction.isExist(locator.pointsIcon);
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if points header is present",
+                    "Points box is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if points header is present",
+                    "Points box is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if if correct {string} is displayed")
+    public void verify_if_if_correct_is_displayed(String expectedUserName) {
+        ispassed = false;
+        try {
+            String extractedUserName = DriverAction.getElementText(locator.userName);
+            if (extractedUserName.equalsIgnoreCase(expectedUserName))
+                ispassed = true;
+
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if correct username is displayed",
+                    "Correct username is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if correct username is displayed",
+                    "Incorrect username", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if a {string} drop down is present")
+    public void verify_if_a_drop_down_is_present(String dropdownTitle) {
+        ispassed = false;
+        try {
+            boolean flag = false;
+            String extractedText = DriverAction.getElementText(locator.learnerdropdownTitle);
+            String[] names = dropdownTitle.split(";");
+
+            List<WebElement> dropdownElements = DriverAction.getElements(locator.learnerDropdown);
+            List<String> extractedDropdownText = new ArrayList<>();
+
+            for (int i = 0; i < dropdownElements.size(); i++) {
+                extractedDropdownText.add(dropdownElements.get(i).getAttribute("textContent").trim());
+            }
+
+            if (extractedText.equalsIgnoreCase(names[0])) {
+                flag = true;
+            }
+            if (flag) {
+                for (int i = 0, j = 1; i < extractedDropdownText.size(); i++, j++) {
+                    System.out.println(extractedDropdownText.get(i)+"  "+names[j]);
+                    if (extractedDropdownText.get(i).equalsIgnoreCase(names[j])){
+                        flag = true;
+                    }
+                    else{
+                        flag = false;break;
+                    }
+                }
+            }
+            System.out.println(flag);
+            if(flag)
+                ispassed=true;
+            else
+                ispassed=false;
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if if Learner text and its dropdown elements are present",
+                    "Correct elements are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if if Learner text and its dropdown elements  are present",
+                    "Incorrect elements are present", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if a {string} button is present")
+    public void verify_if_a_button_is_present(String string) {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("Verify if a searchInput field is present")
+    public void verify_if_a_search_input_field_is_present() {
+        // Write code here that turns the phrase above into concrete actions
+        throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("Verify if a {string} is present")
+    public void verifyIfAIsPresent(String expectedText) {
+//        ispassed = false;
+//        try {
+//            boolean flag = false;
+//            String extractedText = DriverAction.getElementText(locator.learnerdropdownTitle);
+//            String[] names = dropdownTitle.split(";");
+//
+//            List<WebElement> dropdownElements = DriverAction.getElements(locator.learnerDropdown);
+//            List<String> extractedDropdownText = new ArrayList<>();
+//
+//            for (int i = 0; i < dropdownElements.size(); i++) {
+//                extractedDropdownText.add(dropdownElements.get(i).getAttribute("textContent").trim());
+//            }
+//
+//            if (extractedText.equalsIgnoreCase(names[0])) {
+//                flag = true;
+//            }
+//            if (flag) {
+//                for (int i = 0, j = 1; i < extractedDropdownText.size(); i++, j++) {
+//                    System.out.println(extractedDropdownText.get(i)+"  "+names[j]);
+//                    if (extractedDropdownText.get(i).equalsIgnoreCase(names[j])){
+//                        flag = true;
+//                    }
+//                    else{
+//                        flag = false;break;
+//                    }
+//                }
+//            }
+//            System.out.println(flag);
+//            if(flag)
+//                ispassed=true;
+//            else
+//                ispassed=false;
+//        } catch (Exception ex) {
+//            ispassed = false;
+//        }
+//        if (ispassed)
+//            GemTestReporter.addTestStep("Verify if if Learner text and its dropdown elements are present",
+//                    "Correct elements are present",
+//                    STATUS.PASS, DriverAction.takeSnapShot());
+//        else
+//            GemTestReporter.addTestStep("Verify if if Learner text and its dropdown elements  are present",
+//                    "Incorrect elements are present", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if a {string} button is present on screen")
+    public void verifyIfAButtonIsPresentOnScreen(String arg0) {
     }
 }

@@ -12,8 +12,10 @@ public class locator {
     public static By homeDiv = By.xpath("//div[@class='tl-title tl-ellipsis']");
     public static By searchIcon = By.xpath("//input[@id='tl-grid-mode-search']");
     public static By progressDashboard = By.xpath("//div[@id='tl-microstats-learner-dashboard']");
-    public static By list_Icons = By.xpath("//div[@class='tl-icons-block']");
-
+    public static By pointsIcon = By.xpath("//a[@data-entrancemode='points']");
+    public static By userName = By.xpath("//li[@id='tl-dropdown-roles']//span");
+    public static By learnerdropdownTitle = By.xpath("//li[@id='tl-dropdown-roles']//b[1]");
+public static By learnerDropdown = By.xpath("//li[@id='tl-dropdown-roles']//ul[@class='dropdown-menu']//li//a");
 
 }
 
