@@ -13,9 +13,24 @@ public class locator {
     public static By searchIcon = By.xpath("//input[@id='tl-grid-mode-search']");
     public static By progressDashboard = By.xpath("//div[@id='tl-microstats-learner-dashboard']");
     public static By pointsIcon = By.xpath("//a[@data-entrancemode='points']");
-    public static By userName = By.xpath("//li[@id='tl-dropdown-roles']//span");
     public static By learnerdropdownTitle = By.xpath("//li[@id='tl-dropdown-roles']//b[1]");
-public static By learnerDropdown = By.xpath("//li[@id='tl-dropdown-roles']//ul[@class='dropdown-menu']//li//a");
+    public static By learnerDropdown = By.xpath("//li[@id='tl-dropdown-roles']//ul[@class='dropdown-menu']//li//a");
+    public static By messageText = By.xpath("//li[@id='tl-dropdown-messages']//a");
+    public static By messageDropdown = By.xpath("//li[@id='tl-dropdown-messages']//ul[@class='dropdown-menu']//li//a");
 
+    public static By fun(String text) {
+        switch (text) {
+            case "Himanshu Panchal":
+                return By.xpath("//li[@id='tl-dropdown-roles']//span");
+            case "HELP":
+                return By.xpath("//li[@class='hidden-phone']//a");
+            case "Log out":
+                return By.xpath("//li[@class='hidden-desktop']//a");
+            default:
+                return null;
+        }
+    }
+    public static By logouticon = By.xpath("//li[@class='hidden-desktop']//a");
+    public static By inputField = By.xpath("//input[@id='tl-grid-mode-search']");
 }
 

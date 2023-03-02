@@ -92,7 +92,7 @@ public class stepDefinition {
         ispassed = false;
         try {
             DriverAction.waitSec(5);
-            System.out.println(DriverAction.getElementsText(locator.homeDiv));
+
             if (DriverAction.isExist(locator.avatar) && DriverAction.isExist(locator.searchIcon)
                     && DriverAction.isExist(locator.progressDashboard))
                 ispassed = true;
@@ -144,24 +144,23 @@ public class stepDefinition {
                     "Points box is missing", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
-    @Then("Verify if if correct {string} is displayed")
-    public void verify_if_if_correct_is_displayed(String expectedUserName) {
+    @Then("Verify if correct {string} is displayed")
+    public void verify_if_if_correct_is_displayed(String expectedText) {
         ispassed = false;
         try {
-            String extractedUserName = DriverAction.getElementText(locator.userName);
-            if (extractedUserName.equalsIgnoreCase(expectedUserName))
+            String extractedText = DriverAction.getElementText(locator.fun(expectedText));
+            if (extractedText.trim().equalsIgnoreCase(expectedText))
                 ispassed = true;
-
         } catch (Exception ex) {
             ispassed = false;
         }
         if (ispassed)
-            GemTestReporter.addTestStep("Verify if correct username is displayed",
-                    "Correct username is present",
+            GemTestReporter.addTestStep("Verify if "+expectedText+" is displayed",
+                    "Correct text is present",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if correct username is displayed",
-                    "Incorrect username", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify if "+expectedText+" is displayed",
+                    "Incorrect text is displayed", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
     @Then("Verify if a {string} drop down is present")
@@ -184,7 +183,7 @@ public class stepDefinition {
             }
             if (flag) {
                 for (int i = 0, j = 1; i < extractedDropdownText.size(); i++, j++) {
-                    System.out.println(extractedDropdownText.get(i)+"  "+names[j]);
+
                     if (extractedDropdownText.get(i).equalsIgnoreCase(names[j])){
                         flag = true;
                     }
@@ -193,7 +192,7 @@ public class stepDefinition {
                     }
                 }
             }
-            System.out.println(flag);
+
             if(flag)
                 ispassed=true;
             else
@@ -210,65 +209,87 @@ public class stepDefinition {
                     "Incorrect elements are present", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
-    @Then("Verify if a {string} button is present")
-    public void verify_if_a_button_is_present(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
     @Then("Verify if a searchInput field is present")
     public void verify_if_a_search_input_field_is_present() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        ispassed=false;
+        try{
+            ispassed = DriverAction.isExist(locator.inputField);
+        }catch (Exception ex){
+            ispassed=false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if a searchInput field is present",
+                    "Input box is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if a searchInput field is present",
+                    "input box is missing", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
     @Then("Verify if a {string} is present")
     public void verifyIfAIsPresent(String expectedText) {
-//        ispassed = false;
-//        try {
-//            boolean flag = false;
-//            String extractedText = DriverAction.getElementText(locator.learnerdropdownTitle);
-//            String[] names = dropdownTitle.split(";");
-//
-//            List<WebElement> dropdownElements = DriverAction.getElements(locator.learnerDropdown);
-//            List<String> extractedDropdownText = new ArrayList<>();
-//
-//            for (int i = 0; i < dropdownElements.size(); i++) {
-//                extractedDropdownText.add(dropdownElements.get(i).getAttribute("textContent").trim());
-//            }
-//
-//            if (extractedText.equalsIgnoreCase(names[0])) {
-//                flag = true;
-//            }
-//            if (flag) {
-//                for (int i = 0, j = 1; i < extractedDropdownText.size(); i++, j++) {
-//                    System.out.println(extractedDropdownText.get(i)+"  "+names[j]);
-//                    if (extractedDropdownText.get(i).equalsIgnoreCase(names[j])){
-//                        flag = true;
-//                    }
-//                    else{
-//                        flag = false;break;
-//                    }
-//                }
-//            }
-//            System.out.println(flag);
-//            if(flag)
-//                ispassed=true;
-//            else
-//                ispassed=false;
-//        } catch (Exception ex) {
-//            ispassed = false;
-//        }
-//        if (ispassed)
-//            GemTestReporter.addTestStep("Verify if if Learner text and its dropdown elements are present",
-//                    "Correct elements are present",
-//                    STATUS.PASS, DriverAction.takeSnapShot());
-//        else
-//            GemTestReporter.addTestStep("Verify if if Learner text and its dropdown elements  are present",
-//                    "Incorrect elements are present", STATUS.FAIL, DriverAction.takeSnapShot());
-    }
+        ispassed = false;
+        try {
+            boolean flag = false;
+            String extractedText = DriverAction.getElementText(locator.messageText);
 
-    @Then("Verify if a {string} button is present on screen")
-    public void verifyIfAButtonIsPresentOnScreen(String arg0) {
+            String[] names = expectedText.split(";");
+            List<WebElement> dropdownElements = DriverAction.getElements(locator.messageDropdown);
+            List<String> extractedDropdownText = new ArrayList<>();
+
+            for (int i = 0; i < dropdownElements.size(); i++) {
+                extractedDropdownText.add(dropdownElements.get(i).getAttribute("textContent").trim());
+            }
+
+            if (extractedText.trim().equalsIgnoreCase(names[0])) {
+               flag = true;
+            }
+            if (flag) {
+                for (int i = 0, j = 1; i < extractedDropdownText.size(); i++, j++) {
+
+                    if (extractedDropdownText.get(i).equalsIgnoreCase(names[j])){
+                        flag = true;
+                    }
+                   else{
+                        flag = false;break;
+                    }
+                }
+            }
+
+            if(flag)
+                ispassed=true;
+            else
+                ispassed=false;
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if if Message text and its dropdown elements are present",
+                    "Correct elements are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if if Message text and its dropdown elements  are present",
+                    "Incorrect elements are present", STATUS.FAIL, DriverAction.takeSnapShot());
+        }
+
+    @Then("Verify if correct {string} button is displayed")
+    public void verifyIfCorrectButtonIsDisplayed(String expectedText) {
+        ispassed=false;
+        try{
+            WebElement logOutButton = DriverAction.getElement(locator.logouticon);
+            String extractedText = logOutButton.getAttribute("textContent").trim();
+            if(expectedText.equalsIgnoreCase(extractedText))
+                ispassed=true;
+        }catch (Exception ex){
+            ispassed=false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if "+ expectedText+" button is displayed",
+                    "Correct button is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if "+ expectedText+" button is displayed",
+                    "Incorrect button is present", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }
