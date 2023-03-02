@@ -32,5 +32,12 @@ public class locator {
     }
     public static By logouticon = By.xpath("//li[@class='hidden-desktop']//a");
     public static By inputField = By.xpath("//input[@id='tl-grid-mode-search']");
+    public static By pointsHeader = By.xpath("//div[@class='modal fade hide in']//div[@class='modal-header']//h3");
+    public  static  By pointsDialogueBox = By.xpath("//div[@id='tl-gamification-widget-modal']");
+
+
+
+
+
 }
 
