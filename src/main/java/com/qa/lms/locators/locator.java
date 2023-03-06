@@ -35,7 +35,15 @@ public class locator {
     public static By pointsHeader = By.xpath("//div[@class='modal fade hide in']//div[@class='modal-header']//h3");
     public  static  By pointsDialogueBox = By.xpath("//div[@id='tl-gamification-widget-modal']");
 
-
+public  static By fun2(String text){
+    switch (text){
+        case "Points": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Points']");
+        case "Levels": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Levels']");
+        case "Badges": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Badges']");
+        case "Certificates": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Certificates']");
+        default:return By.xpath("");
+    }
+}
 
 
 

@@ -328,11 +328,45 @@ public class stepDefinition {
             ispassed = false;
         }
         if (ispassed)
-            GemTestReporter.addTestStep("Verify if points dialogue box with title: "+title+" is present",
-                    "Points dialogue box is present with title: "+title,
+            GemTestReporter.addTestStep("Verify if points dialogue box with title: " + title + " is present",
+                    "Points dialogue box is present with title: " + title,
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
             GemTestReporter.addTestStep("Verify if points dialogue box with title: \"+title+\" is present",
                     "Points dialogue box is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Verify if {string}, {string}, {string} and {string} button are displayed")
+    public void verifyIfAndButtonAreDisplayed(String points, String levels, String badges, String certificates) {
+        ispassed = false;
+        String missingButton = "";
+        int flag=0;
+        List<String> list = new ArrayList<>();
+        try {
+            list.add(points);
+            list.add(badges);
+            list.add(levels);
+            list.add(certificates);
+            for (int i = 0; i < list.size(); i++) {
+                flag=i;
+                if (!DriverAction.isExist(locator.fun2(list.get(i)))){
+                    ispassed = false;break;
+                }
+                else {
+                   ispassed=true;
+                }
+            }
+
+        } catch (Exception ex) {
+            ispassed = false;
+            missingButton=list.get(flag);
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if " + points + ", " + levels + ", " + badges + " and " + certificates + " buttons are present",
+                    "All the buttons are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if \"+points+\", \"+levels +\", \"+badges+\" and \"+certificates+ \" buttons are present",
+                    missingButton + " is missing", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }

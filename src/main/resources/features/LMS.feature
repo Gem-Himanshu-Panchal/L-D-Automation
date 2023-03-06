@@ -25,8 +25,8 @@ Feature:LMS
 
   Scenario Outline: Verify functionality of Points icon
   Given Click on points icon
-  Then Verify if a dialogue box with "<title>" appears
-#  And Verify if "<points1>", "<levels>", "<badges>" and "<certificates>" button are displayed
+#  Then Verify if a dialogue box with "<title>" appears
+  And Verify if "<points1>", "<levels>", "<badges>" and "<certificates>" button are displayed
 #  Then Verify "<displayedNames>" names are displayed inside the dialogue box
 #  And Verify if all displayed names have "<rank>", "<dp>", "<name>" and "<points>"
 #  Then Verify if on hovering on first 3 displayed names, tooltip "<tooltip1>", "<tooltip2>" and "<tooltip3>" is visible
