@@ -340,7 +340,7 @@ public class stepDefinition {
     public void verifyIfAndButtonAreDisplayed(String points, String levels, String badges, String certificates) {
         ispassed = false;
         String missingButton = "";
-        int flag=0;
+        int flag = 0;
         List<String> list = new ArrayList<>();
         try {
             list.add(points);
@@ -348,18 +348,18 @@ public class stepDefinition {
             list.add(levels);
             list.add(certificates);
             for (int i = 0; i < list.size(); i++) {
-                flag=i;
-                if (!DriverAction.isExist(locator.fun2(list.get(i)))){
-                    ispassed = false;break;
-                }
-                else {
-                   ispassed=true;
+                flag = i;
+                if (!DriverAction.isExist(locator.fun2(list.get(i)))) {
+                    ispassed = false;
+                    break;
+                } else {
+                    ispassed = true;
                 }
             }
 
         } catch (Exception ex) {
             ispassed = false;
-            missingButton=list.get(flag);
+            missingButton = list.get(flag);
         }
         if (ispassed)
             GemTestReporter.addTestStep("Verify if " + points + ", " + levels + ", " + badges + " and " + certificates + " buttons are present",
@@ -368,5 +368,25 @@ public class stepDefinition {
         else
             GemTestReporter.addTestStep("Verify if \"+points+\", \"+levels +\", \"+badges+\" and \"+certificates+ \" buttons are present",
                     missingButton + " is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify {string} names are displayed inside the dialogue box")
+    public void verifyNamesAreDisplayedInsideTheDialogueBox(String countOfNames) {
+        ispassed = false;
+        try {
+            int count = Integer.parseInt(countOfNames);
+            List<WebElement> list = DriverAction.getElements(locator.countPointDialogueBox);
+            if (list.size() == count)
+                ispassed = true;
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if " + countOfNames + " names are displayed",
+                    countOfNames + " are displayed in points dialogue box",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if \"+countOfNames +\" names are displayed",
+                    "incorrect count of names", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }

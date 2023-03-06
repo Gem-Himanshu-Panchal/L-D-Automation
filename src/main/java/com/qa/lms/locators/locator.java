@@ -45,7 +45,7 @@ public  static By fun2(String text){
     }
 }
 
-
+public static By countPointDialogueBox = By.xpath("//tr");
 
 }
 
