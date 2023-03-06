@@ -387,6 +387,30 @@ public class stepDefinition {
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
             GemTestReporter.addTestStep("Verify if \"+countOfNames +\" names are displayed",
-                    "incorrect count of names", STATUS.FAIL, DriverAction.takeSnapShot());
+                    "Incorrect count of names", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Verify if all displayed names have {string}, {string}, {string} and {string} for {string}")
+    public void verifyIfAllDisplayedNamesHaveAnd(String rank, String dp, String name, String points, String countOfNames) {
+        ispassed = false;
+        try {
+            int count = Integer.parseInt(countOfNames);
+            List<WebElement> rankList = DriverAction.getElements(locator.rank);
+            List<WebElement> dpList = DriverAction.getElements(locator.dp);
+            List<WebElement> nameList = DriverAction.getElements(locator.userName);
+            List<WebElement> pointslist = DriverAction.getElements(locator.points);
+            if (rankList.size() == count && dpList.size() == count && nameList.size() == count && pointslist.size() == count - 1)
+                ispassed = true;
+
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if " + rank + ", " + dp + ", " + name + " and " + points + " are visible in points dialogue box",
+                    "Displayed names have mentioned columns",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if "+rank +", "+dp+", "+name+" and "+points +" are visible in points dialogue box",
+                    "Displayed names have missing columns", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }

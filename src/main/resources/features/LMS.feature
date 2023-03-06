@@ -28,7 +28,7 @@ Feature:LMS
 #  Then Verify if a dialogue box with "<title>" appears
 #  And Verify if "<points1>", "<levels>", "<badges>" and "<certificates>" button are displayed
   Then Verify "<displayedNames>" names are displayed inside the dialogue box
-#  And Verify if all displayed names have "<rank>", "<dp>", "<name>" and "<points>"
+  And Verify if all displayed names have "<rank>", "<dp>", "<name>" and "<points>" for "<displayedNames>"
 #  Then Verify if on hovering on first 3 displayed names, tooltip "<tooltip1>", "<tooltip2>" and "<tooltip3>" is visible
 #  And Verify if "<userName>" is displayed at the end on the dialogue box with respective "<rank>", "<dp>", "<name>" and "<points>"
 #  Then Verify if "<button>" is present

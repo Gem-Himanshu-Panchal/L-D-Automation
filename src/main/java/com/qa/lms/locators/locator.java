@@ -46,6 +46,9 @@ public  static By fun2(String text){
 }
 
 public static By countPointDialogueBox = By.xpath("//tr");
-
+public static By rank = By.xpath("//td[@class='tl-ranking-align']");
+public static By dp = By.xpath("//td[@class='tl-gamification-user']//img");
+    public static By userName = By.xpath("//td[@class='tl-gamification-user']");
+    public static By points = By.xpath("//td[@class='tl-gamification-points']");
 }
 
