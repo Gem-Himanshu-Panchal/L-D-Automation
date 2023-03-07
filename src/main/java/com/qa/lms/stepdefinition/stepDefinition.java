@@ -512,4 +512,26 @@ public class stepDefinition {
             GemTestReporter.addTestStep("Verify if \"+text+\" button is present",
                     text+" button is missing", STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
+    @And("Click on {string} button")
+    public void clickOnButton(String text) {
+        ispassed=false;
+        try{
+            if(DriverAction.isExist(locator.howToCollectPointsButton)){
+                DriverAction.waitSec(2);
+                DriverAction.click(locator.howToCollectPointsButton);
+                ispassed=true;
+            }
+        }catch (Exception ex){
+            ispassed=false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Click on "+text+" button",
+                    text+" button is clicked",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Click on "+text+" button",
+                    "Unable to click on "+text+" button",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
 }
