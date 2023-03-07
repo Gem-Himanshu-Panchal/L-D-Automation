@@ -44,12 +44,17 @@ public  static By fun2(String text){
         default:return By.xpath("");
     }
 }
-
+public static By userRow = By.xpath("//div[@class='tl-gamification-my-list']//tr");
 public static By countPointDialogueBox = By.xpath("//tr");
 public static By rank = By.xpath("//td[@class='tl-ranking-align']");
 public static By dp = By.xpath("//td[@class='tl-gamification-user']//img");
     public static By userName = By.xpath("//td[@class='tl-gamification-user']");
     public static By points = By.xpath("//td[@class='tl-gamification-points']");
     public  static  By first3Rank = By.xpath("//td[@class='tl-ranking-align']//img");
+    public static By userRank  = By.xpath("//div[@class='tl-gamification-my-list']//div[@class='tl-ranking-number']");
+    public static By userDp = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']//img");
+
+public static By currentUserName = By.ByName.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
+public static By currentUserPoints = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points tl-gamification-points-tab']");
 }
 

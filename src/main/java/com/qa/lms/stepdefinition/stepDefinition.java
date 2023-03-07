@@ -446,4 +446,51 @@ public class stepDefinition {
             GemTestReporter.addTestStep("Verify if on hovering on Rank 1, Rank 2 and Rank 3 a tooltip appears",
                     wrongToolTip + " is missing or incorrect", STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
+    @And("Verify if user data is displayed at the end on the dialogue box with respective {string}, {string}, {string} and {string}")
+    public void verifyIfIsDisplayedAtTheEndOnTheDialogueBoxWithRespectiveAnd(String rank, String dp, String name, String points) {
+        ispassed = false;
+        String missingData = "";
+        boolean isRowDisplayed = false;
+        try {
+            System.out.println(DriverAction.getElementText(locator.currentUserName));
+            isRowDisplayed = DriverAction.isExist(locator.userRow);
+            if (isRowDisplayed) {
+if(DriverAction.isExist(locator.userRank)){
+    if(DriverAction.isExist(locator.userDp)){
+        if(DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)){
+            if(DriverAction.isExist(locator.currentUserPoints)){
+                ispassed=true;
+            }
+            else{
+                ispassed=false;
+                missingData=points;
+            }
+        }else
+            missingData=name;
+    }else
+        missingData=dp;
+}
+else
+    missingData=rank;
+
+            }
+
+        } catch (Exception ex) {
+ispassed=false;
+        }
+        if (isRowDisplayed) {
+            if (ispassed) {
+                GemTestReporter.addTestStep("Verify if user data row is displayed",
+                        "User data row is displayed and have correct data",
+                        STATUS.PASS, DriverAction.takeSnapShot());
+            } else
+                GemTestReporter.addTestStep("Verify if user data row is displayed",
+                        "User data row is displayed but have incorrect data", STATUS.FAIL, DriverAction.takeSnapShot());
+        } else
+            GemTestReporter.addTestStep("Verify if user data row is displayed",
+                    missingData+ " is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+
+
+    }
 }
