@@ -489,4 +489,27 @@ public class stepDefinition {
                     "User data row is displayed but have incorrect data", STATUS.FAIL, DriverAction.takeSnapShot());
 
     }
+
+    @Then("Verify if {string} is present")
+    public void verifyIfIsPresent(String text) {
+        ispassed = false;
+        boolean flag = false;
+        try {
+            flag = DriverAction.isExist(locator.howToCollectPointsButton);
+            if (flag) {
+                if (DriverAction.getElementText(locator.howToCollectPointsButton).trim().equalsIgnoreCase(text)) {
+                    ispassed = true;
+                }
+            }
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed==true && flag==true)
+            GemTestReporter.addTestStep("Verify if "+text+" button is present",
+                    text+" button is present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if \"+text+\" button is present",
+                    text+" button is missing", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
 }
