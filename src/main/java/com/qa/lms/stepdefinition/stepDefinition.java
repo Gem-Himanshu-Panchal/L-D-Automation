@@ -453,31 +453,28 @@ public class stepDefinition {
         String missingData = "";
         boolean isRowDisplayed = false;
         try {
-            System.out.println(DriverAction.getElementText(locator.currentUserName));
             isRowDisplayed = DriverAction.isExist(locator.userRow);
             if (isRowDisplayed) {
-if(DriverAction.isExist(locator.userRank)){
-    if(DriverAction.isExist(locator.userDp)){
-        if(DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)){
-            if(DriverAction.isExist(locator.currentUserPoints)){
-                ispassed=true;
-            }
-            else{
-                ispassed=false;
-                missingData=points;
-            }
-        }else
-            missingData=name;
-    }else
-        missingData=dp;
-}
-else
-    missingData=rank;
+                if (DriverAction.isExist(locator.userRank)) {
+                    if (DriverAction.isExist(locator.userDp)) {
+                        if (DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)) {
+                            if (DriverAction.isExist(locator.currentUserPoints)) {
+                                ispassed = true;
+                            } else {
+                                ispassed = false;
+                                missingData = points;
+                            }
+                        } else
+                            missingData = name;
+                    } else
+                        missingData = dp;
+                } else
+                    missingData = rank;
 
             }
 
         } catch (Exception ex) {
-ispassed=false;
+            ispassed = false;
         }
         if (isRowDisplayed) {
             if (ispassed) {
@@ -486,11 +483,10 @@ ispassed=false;
                         STATUS.PASS, DriverAction.takeSnapShot());
             } else
                 GemTestReporter.addTestStep("Verify if user data row is displayed",
-                        "User data row is displayed but have incorrect data", STATUS.FAIL, DriverAction.takeSnapShot());
+                        missingData + " is missing", STATUS.FAIL, DriverAction.takeSnapShot());
         } else
             GemTestReporter.addTestStep("Verify if user data row is displayed",
-                    missingData+ " is missing", STATUS.FAIL, DriverAction.takeSnapShot());
-
+                    "User data row is displayed but have incorrect data", STATUS.FAIL, DriverAction.takeSnapShot());
 
     }
 }

@@ -30,31 +30,38 @@ public class locator {
                 return null;
         }
     }
+
     public static By logouticon = By.xpath("//li[@class='hidden-desktop']//a");
     public static By inputField = By.xpath("//input[@id='tl-grid-mode-search']");
     public static By pointsHeader = By.xpath("//div[@class='modal fade hide in']//div[@class='modal-header']//h3");
-    public  static  By pointsDialogueBox = By.xpath("//div[@id='tl-gamification-widget-modal']");
+    public static By pointsDialogueBox = By.xpath("//div[@id='tl-gamification-widget-modal']");
 
-public  static By fun2(String text){
-    switch (text){
-        case "Points": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Points']");
-        case "Levels": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Levels']");
-        case "Badges": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Badges']");
-        case "Certificates": return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Certificates']");
-        default:return By.xpath("");
+    public static By fun2(String text) {
+        switch (text) {
+            case "Points":
+                return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Points']");
+            case "Levels":
+                return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Levels']");
+            case "Badges":
+                return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Badges']");
+            case "Certificates":
+                return By.xpath("//ul[@class='nav nav-tabs']//li//a[text()='Certificates']");
+            default:
+                return By.xpath("");
+        }
     }
-}
-public static By userRow = By.xpath("//div[@class='tl-gamification-my-list']//tr");
-public static By countPointDialogueBox = By.xpath("//tr");
-public static By rank = By.xpath("//td[@class='tl-ranking-align']");
-public static By dp = By.xpath("//td[@class='tl-gamification-user']//img");
+
+    public static By userRow = By.xpath("//div[@class='tl-gamification-my-list']//tr");
+    public static By countPointDialogueBox = By.xpath("//tr");
+    public static By rank = By.xpath("//td[@class='tl-ranking-align']");
+    public static By dp = By.xpath("//td[@class='tl-gamification-user']//img");
     public static By userName = By.xpath("//td[@class='tl-gamification-user']");
     public static By points = By.xpath("//td[@class='tl-gamification-points']");
-    public  static  By first3Rank = By.xpath("//td[@class='tl-ranking-align']//img");
-    public static By userRank  = By.xpath("//div[@class='tl-gamification-my-list']//div[@class='tl-ranking-number']");
+    public static By first3Rank = By.xpath("//td[@class='tl-ranking-align']//img");
+    public static By userRank = By.xpath("//div[@class='tl-gamification-my-list']//div[@class='tl-ranking-number']");
     public static By userDp = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']//img");
 
-public static By currentUserName = By.ByName.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
-public static By currentUserPoints = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points tl-gamification-points-tab']");
+    public static By currentUserName = By.ByName.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
+    public static By currentUserPoints = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points tl-gamification-points-tab']");
 }
 
