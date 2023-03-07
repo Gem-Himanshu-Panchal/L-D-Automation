@@ -64,8 +64,9 @@ public class locator {
     public static By currentUserName = By.ByName.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
     public static By currentUserPoints = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points tl-gamification-points-tab']");
     public static By howToCollectPointsButton = By.xpath("//a[@id='tl-howto-collect-points']");
-
-
+public static By howToCollectPointsHeader = By.xpath("//h3[text()='How to collect points']");
+public static By getHowToCollectPointsLists = By.xpath("//ul[@id='tl-get-points-conditions']//li");
+public static By backButton  = By.xpath("//a[@class='btn']//span");
 
 
 
