@@ -410,7 +410,40 @@ public class stepDefinition {
                     "Displayed names have mentioned columns",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if "+rank +", "+dp+", "+name+" and "+points +" are visible in points dialogue box",
+            GemTestReporter.addTestStep("Verify if " + rank + ", " + dp + ", " + name + " and " + points + " are visible in points dialogue box",
                     "Displayed names have missing columns", STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if on hovering on first {int} displayed names, tooltip {string}, {string} and {string} is visible")
+    public void verifyIfOnHoveringOnFirstDisplayedNamesTooltipAndIsVisible(int arg0, String tooltip1, String tooltip2, String tooltip3) {
+        ispassed = false;
+        String wrongToolTip = "";
+        try {
+            DriverAction.waitSec(2);
+
+            List<String> tooltipText = new ArrayList<>();
+            tooltipText.add(tooltip1);
+            tooltipText.add(tooltip2);
+            tooltipText.add(tooltip3);
+            List<WebElement> ranks = DriverAction.getElements(locator.first3Rank);
+
+            for (int i = 0; i < ranks.size(); i++) {
+                if (!ranks.get(i).getAttribute("title").equalsIgnoreCase(tooltipText.get(i))) {
+                    wrongToolTip = ranks.get(i).getAttribute("title");
+                    ispassed = false;
+                    break;
+                } else
+                    ispassed = true;
+            }
+        } catch (Exception ex) {
+            ispassed = false;
+        }
+        if (ispassed)
+            GemTestReporter.addTestStep("Verify if on hovering on Rank 1, Rank 2 and Rank 3 a tooltip appears",
+                    "Correct tooltip are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if on hovering on Rank 1, Rank 2 and Rank 3 a tooltip appears",
+                    wrongToolTip + " is missing or incorrect", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }
