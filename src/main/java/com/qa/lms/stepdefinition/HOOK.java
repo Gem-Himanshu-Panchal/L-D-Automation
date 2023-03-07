@@ -9,5 +9,6 @@ public class HOOK {
     @Before
     public void Start() throws GemException {
         DriverManager.setUpBrowser();
+        DriverAction.maximizeBrowser();
     }
 }
