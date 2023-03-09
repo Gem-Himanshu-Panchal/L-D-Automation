@@ -39,7 +39,7 @@ Feature:LMS
       | Leaderboard | Points  | Levels | Badges | Certificates | 101            | Rank | DP | Points | 1st      | 2nd      | 3rd      | Himanshu Panchal | How to collect points | Each login gives 1 point;Each unit completion gives 5 points;Each course completion gives 20 points;Each certificate gives 20 points;Each successful test completion gives 20 points;Each successful assignment completion gives 10 points;Each discussion topic or comment gives 5 points;Each upvote on discussion comments gives 1 point; | multiplied by test score | multiplied by assignment grade | back |
 
 
-
+Scenario: Verify functionality of Levels icon
 
 
 
