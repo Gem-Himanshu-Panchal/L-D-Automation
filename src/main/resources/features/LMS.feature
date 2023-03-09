@@ -47,11 +47,14 @@ Feature:LMS
     Then Verify "<displayedNames>" names are displayed inside the dialogue box
     And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<levels>" for "<displayedNames>"
     And Verify if user data is displayed at the end on Levels page with respective "<rank>", "<dp>", "<userName>" and "<levels>"
+    And Click on "<button>" button
+    Then Verify if How to level up page opens
+    And Verify if 3 "<text>" lines are present
+    And Click on "<back>" button for directing to home page
+    Then Verify if user goes back to "<title>" box home page
     Examples:
-      | levels | displayedNames | rank | dp | userName         |
-      | Levels | 101            | Rank | DP | Himanshu Panchal |
-
-
+      | levels | displayedNames | rank | dp | userName         | button          | title       | text                                                                                                 | back |
+      | Levels | 101            | Rank | DP | Himanshu Panchal | How to level up | Leaderboard | Upgrade level every 3000 points;Upgrade level every 5 completed courses;Upgrade level every 5 badges | Back |
 
 
 

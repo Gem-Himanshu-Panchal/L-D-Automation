@@ -466,9 +466,9 @@ public class stepDefinition {
         passed = false;
         boolean flag = false;
         try {
-            flag = DriverAction.isExist(locator.howToCollectPointsButton);
+            flag = DriverAction.isExist(locator.button(text));
             if (flag) {
-                if (DriverAction.getElementText(locator.howToCollectPointsButton).trim().equalsIgnoreCase(text)) {
+                if (DriverAction.getElementText(locator.button(text)).trim().equalsIgnoreCase(text)) {
                     passed = true;
                 }
             }
@@ -488,9 +488,9 @@ public class stepDefinition {
     public void clickOnButton(String text) {
         passed = false;
         try {
-            if (DriverAction.isExist(locator.howToCollectPointsButton)) {
+            if (DriverAction.isExist(locator.button(text))) {
                 DriverAction.waitSec(2);
-                DriverAction.click(locator.howToCollectPointsButton);
+                DriverAction.click(locator.button(text));
                 passed = true;
             }
         } catch (Exception ex) {
@@ -510,9 +510,8 @@ public class stepDefinition {
     public void verifyIfDialogueBoxAppears(String text) {
         passed = false;
         try {
-            List<WebElement> list = DriverAction.getElements(locator.getHowToCollectPointsLists);
             if (DriverAction.getElementText(locator.howToCollectPointsHeader).equalsIgnoreCase(text) &&
-                    list.size() == 8 && DriverAction.isExist(locator.backButton)) {
+                   DriverAction.isExist(locator.backButton)) {
                 passed = true;
             }
         } catch (Exception ex) {
@@ -607,21 +606,24 @@ public class stepDefinition {
         passed = false;
         try {
             String[] lines = text.split(";");
-            List<WebElement> presentLines = DriverAction.getElements(locator.getHowToCollectPointsLists);
-            for (int i = 0; i < countOfLines; i++) {
-                if (presentLines.get(i).isDisplayed() && presentLines.get(i).getText().equalsIgnoreCase(lines[i]))
-                    passed = true;
-                else break;
+            List<WebElement> presentLines = DriverAction.getElements(locator.getHowToCollectPointsLists(lines.length));
+            if(presentLines.size()==lines.length) {
+                for (int i = 0; i < countOfLines; i++) {
+                    if (presentLines.get(i).isDisplayed() && presentLines.get(i).getText().equalsIgnoreCase(lines[i]))
+                        passed = true;
+                    else break;
+                }
             }
+            else passed=false;
         } catch (Exception ex) {
             passed = false;
         }
         if (passed)
-            GemTestReporter.addTestStep("Verify if 8 lines are present on Points page",
+            GemTestReporter.addTestStep("Verify if "+countOfLines+" lines are present on Points page",
                     "Lines are present",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if 8 lines are present on Points page",
+            GemTestReporter.addTestStep("Verify if "+countOfLines+" lines are present on Points page",
                     "Lines are missing",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
@@ -659,13 +661,14 @@ public class stepDefinition {
                     missingData + " is missing from Levels page",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
     @And("Click on {string} button present on navbar")
     public void clickOnButtonPresentOnNavbar(String text) {
         passed = false;
         try {
-            DriverAction.waitSec(5);
+            DriverAction.waitSec(1);
             DriverAction.click(locator.levelButton);
-            passed=true;
+            passed = true;
         } catch (Exception ex) {
             passed = false;
         }
@@ -674,10 +677,11 @@ public class stepDefinition {
                     "Successfully clicked on " + text + " button",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Click on "+text+ " button",
-                    "Unable to click on "+text+" button",
+            GemTestReporter.addTestStep("Click on " + text + " button",
+                    "Unable to click on " + text + " button",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
     @Then("Verify if {string} page is open")
     public void verifyIfPageIsOpen(String text) {
         passed = false;
@@ -694,8 +698,29 @@ public class stepDefinition {
                     "User is on " + text + " page",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if "+text+ " page is open",
+            GemTestReporter.addTestStep("Verify if " + text + " page is open",
                     "Unable to go on " + text + " page",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+
+    @Then("Verify if How to level up page opens")
+    public void verifyIfHowToLevelUpPageOpens() {
+        passed = false;
+        try {
+            if (DriverAction.isExist(locator.pointsHeader) && DriverAction.getElementText(locator.pointsHeader).trim()
+                    .equalsIgnoreCase("How to level up"))
+                passed = true;
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if How to level up page opens",
+                    "User is on How to level up page",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if How to level up page opens",
+                    "Unable to redirect on How to level up page",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
