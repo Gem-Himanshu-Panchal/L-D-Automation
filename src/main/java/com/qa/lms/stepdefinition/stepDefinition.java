@@ -625,4 +625,79 @@ public class stepDefinition {
                     "Lines are missing",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
+    @And("Verify if user data is displayed at the end on Levels page with respective {string}, {string}, {string} and {string}")
+    public void verifyIfUserDataIsDisplayedAtTheEndOnLevelsPageWithRespectiveAnd(String rank, String dp, String name, String levels) {
+        passed = false;
+        String missingData = "";
+        boolean isRowDisplayed = false;
+        try {
+            isRowDisplayed = DriverAction.isExist(locator.userRow);
+            if (isRowDisplayed) {
+                if (DriverAction.isExist(locator.userRankLevels)) {
+                    if (DriverAction.isExist(locator.userDp)) {
+                        if (DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)) {
+                            if (DriverAction.isExist(locator.currentUserLevel)) {
+                                passed = true;
+                            } else {
+                                passed = false;
+                                missingData = levels;
+                            }
+                        } else missingData = name;
+                    } else missingData = dp;
+                } else missingData = rank;
+            }
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if current user data is displayed",
+                    "Current user data is displayed",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if current user data is displayed",
+                    missingData + " is missing from Levels page",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+    @And("Click on {string} button present on navbar")
+    public void clickOnButtonPresentOnNavbar(String text) {
+        passed = false;
+        try {
+            DriverAction.waitSec(5);
+            DriverAction.click(locator.levelButton);
+            passed=true;
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Click on " + text + " button",
+                    "Successfully clicked on " + text + " button",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Click on "+text+ " button",
+                    "Unable to click on "+text+" button",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+    @Then("Verify if {string} page is open")
+    public void verifyIfPageIsOpen(String text) {
+        passed = false;
+        try {
+            DriverAction.waitSec(2);
+            if (DriverAction.isExist(locator.isLevelSelected) &&
+                    DriverAction.getElementText(locator.levelButton).trim().equalsIgnoreCase(text))
+                passed = true;
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if " + text + " page is open",
+                    "User is on " + text + " page",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if "+text+ " page is open",
+                    "Unable to go on " + text + " page",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+
 }

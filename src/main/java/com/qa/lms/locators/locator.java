@@ -17,6 +17,8 @@ public class locator {
     public static By learnerDropdown = By.xpath("//li[@id='tl-dropdown-roles']//ul[@class='dropdown-menu']//li//a");
     public static By messageText = By.xpath("//li[@id='tl-dropdown-messages']//a");
     public static By messageDropdown = By.xpath("//li[@id='tl-dropdown-messages']//ul[@class='dropdown-menu']//li//a");
+    public static By userRankLevels = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-ranking-align']//img");
+    public static By currentUserLevel=  By.xpath("//td[@class='tl-gamification-points tl-gamification-levels']");
 
     public static By fun(String text) {
         switch (text) {
@@ -70,6 +72,7 @@ public class locator {
     public static By infoIcon = By.xpath("//li[@class='tl-bold-item']//i[@class='icon-info-circle tl-info-icon']");
     public static By hoverIcon = By.xpath("//div[@class='tooltip fade right in']");
 
-
+public static  By isLevelSelected = By.xpath("//li[@class='hide active']");
+public static By levelButton = By.xpath("//li[@id='levels-row']//a");
 }
 
