@@ -601,4 +601,28 @@ public class stepDefinition {
                     "Unable to go back to " + title + " page",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
+
+    @And("Verify if {int} {string} lines are present")
+    public void verifyIfLinesArePresent(int countOfLines, String text) {
+        passed = false;
+        try {
+            String[] lines = text.split(";");
+            List<WebElement> presentLines = DriverAction.getElements(locator.getHowToCollectPointsLists);
+            for (int i = 0; i < countOfLines; i++) {
+                if (presentLines.get(i).isDisplayed() && presentLines.get(i).getText().equalsIgnoreCase(lines[i]))
+                    passed = true;
+                else break;
+            }
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if 8 lines are present on Points page",
+                    "Lines are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if 8 lines are present on Points page",
+                    "Lines are missing",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
 }
