@@ -22,17 +22,17 @@ Feature:LMS
 
   Scenario Outline: Verify functionality of Points icon
     Given Click on points icon
-#    Then Verify if a dialogue box with "<title>" appears
-#    And Verify if "<points1>", "<levels>", "<badges>" and "<certificates>" button are displayed
-#    Then Verify "<displayedNames>" names are displayed inside the dialogue box
-#    And Verify if all displayed names have "<rank>", "<dp>", "<name>" and "<points>" for "<displayedNames>"
-#    Then Verify if on hovering on first three displayed names, tooltip "<tooltip1>", "<tooltip2>" and "<tooltip3>" is visible
-#    And Verify if user data is displayed at the end on the dialogue box with respective "<rank>", "<dp>", "<userName>" and "<points>"
-#    Then Verify if "<button>" is present
+    Then Verify if a dialogue box with "<title>" appears
+    And Verify if "<points1>", "<levels>", "<badges>" and "<certificates>" button are displayed
+    Then Verify "<displayedNames>" names are displayed inside the dialogue box
+    And Verify if all displayed names have "<rank>", "<dp>", "<name>" and "<points>" for "<displayedNames>"
+    Then Verify if on hovering on first three displayed names, tooltip "<tooltip1>", "<tooltip2>" and "<tooltip3>" is visible
+    And Verify if user data is displayed at the end on the dialogue box with respective "<rank>", "<dp>", "<userName>" and "<points>"
+    Then Verify if "<button>" is present
     And Click on "<button>" button
-#    Then Verify if "<button>" dialogue box appears
-#  And Verify if on hovering on few points, tooltip "<tooltip4>" and "<tooltip5>" is visible
-  And Click on "<back>" button for directing to home page
+    Then Verify if "<button>" dialogue box appears
+    And Verify if on hovering on few points, tooltip "<tooltip4>" and "<tooltip5>" is visible
+    And Click on "<back>" button for directing to home page
     Then Verify if user goes back to "<title>" box home page
     Examples:
       | title       | points1 | levels | badges | certificates | displayedNames | rank | dp | points | tooltip1 | tooltip2 | tooltip3 | userName         | button                | text                                                                                                                                                                                                                                                                                                                                         | tooltip4                 | tooltip5                       | back |

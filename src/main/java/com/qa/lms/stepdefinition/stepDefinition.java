@@ -564,41 +564,41 @@ public class stepDefinition {
         passed = false;
         try {
             DriverAction.waitSec(1);
-            if(DriverAction.getElementText(locator.backButton).equalsIgnoreCase(btnName)){
+            if (DriverAction.getElementText(locator.backButton).equalsIgnoreCase(btnName)) {
                 DriverAction.click(locator.backButton);
-                passed=true;
+                passed = true;
             }
 
         } catch (Exception ex) {
             passed = false;
         }
         if (passed)
-            GemTestReporter.addTestStep("Click on "+btnName+" button",
-                    "Clicked on "+btnName+" button",
+            GemTestReporter.addTestStep("Click on " + btnName + " button",
+                    "Clicked on " + btnName + " button",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
             GemTestReporter.addTestStep("Click on \"+btnName+\" button",
-                    "Unable to click on "+btnName+" button",
+                    "Unable to click on " + btnName + " button",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
     @Then("Verify if user goes back to {string} box home page")
     public void verifyIfUserGoesBackToBoxHomePage(String title) {
-        passed=false;
-        try{
+        passed = false;
+        try {
             if (DriverAction.isExist(locator.pointsDialogueBox) &&
                     title.trim().equalsIgnoreCase(DriverAction.getElementText(locator.pointsHeader).trim()))
                 passed = true;
-        }catch (Exception ex){
-            passed=false;
+        } catch (Exception ex) {
+            passed = false;
         }
         if (passed)
-            GemTestReporter.addTestStep("Verify if user goes back to "+title+" page",
-                    "User is on "+title+" page",
+            GemTestReporter.addTestStep("Verify if user goes back to " + title + " page",
+                    "User is on " + title + " page",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
             GemTestReporter.addTestStep("Verify if user goes back to \"+title+\" page",
-                    "Unable to go back to "+title+" page",
+                    "Unable to go back to " + title + " page",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }
