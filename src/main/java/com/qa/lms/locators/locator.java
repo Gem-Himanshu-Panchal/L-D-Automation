@@ -67,7 +67,8 @@ public class locator {
 public static By howToCollectPointsHeader = By.xpath("//h3[text()='How to collect points']");
 public static By getHowToCollectPointsLists = By.xpath("//ul[@id='tl-get-points-conditions']//li");
 public static By backButton  = By.xpath("//a[@class='btn']//span");
-
+public static By infoIcon = By.xpath("//li[@class='tl-bold-item']//i[@class='icon-info-circle tl-info-icon']");
+public static By hoverIcon = By.xpath("//div[@class='tooltip fade right in']");
 
 
 

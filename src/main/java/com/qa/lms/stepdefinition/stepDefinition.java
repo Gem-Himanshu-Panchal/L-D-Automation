@@ -9,6 +9,8 @@ import com.gemini.generic.reporting.STATUS;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
+
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +95,7 @@ public class stepDefinition {
     public void verify_if_gemini_logo_is_present() {
         passed = false;
         try {
-            DriverAction.waitSec(3);
+            DriverAction.waitSec(2);
             passed = DriverAction.isExist(locator.avatar);
         } catch (Exception ex) {
             passed = false;
@@ -168,7 +170,7 @@ public class stepDefinition {
                     if (!extractedDropdownText.get(i).equalsIgnoreCase(names[j])) {
                         flag = false;
                         break;
-                    } 
+                    }
                 }
             }
 
@@ -290,7 +292,6 @@ public class stepDefinition {
     public void verifyIfADialogueBoxWithAppears(String title) {
         passed = false;
         try {
-            DriverAction.waitSec(2);
             if (DriverAction.isExist(locator.pointsDialogueBox) &&
                     title.trim().equalsIgnoreCase(DriverAction.getElementText(locator.pointsHeader).trim()))
                 passed = true;
@@ -511,7 +512,7 @@ public class stepDefinition {
         try {
             List<WebElement> list = DriverAction.getElements(locator.getHowToCollectPointsLists);
             if (DriverAction.getElementText(locator.howToCollectPointsHeader).equalsIgnoreCase(text) &&
-                    list.size() == 8 && DriverAction.isExist(locator.backButton)){
+                    list.size() == 8 && DriverAction.isExist(locator.backButton)) {
                 passed = true;
             }
         } catch (Exception ex) {
@@ -525,5 +526,63 @@ public class stepDefinition {
             GemTestReporter.addTestStep("Verify if " + text + " dialogue box appears",
                     text + " dialogue box is missing",
                     STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+
+    @And("Verify if on hovering on few points, tooltip {string} and {string} is visible")
+    public void verifyIfOnHoveringOnFewPointsTooltipAndIsVisible(String tooltip1, String tooltip2) {
+        passed = false;
+        try {
+            List<WebElement> infoIcons = DriverAction.getElements(locator.infoIcon);
+            List<String> li = new ArrayList<>();
+            li.add(tooltip1);
+            li.add(tooltip2);
+            for (int i = 0; i < infoIcons.size(); i++) {
+                DriverAction.hoverOver(infoIcons.get(i));
+                if (DriverAction.isExist(locator.hoverIcon) && DriverAction.getElementText(locator.hoverIcon)
+                        .trim().equalsIgnoreCase(li.get(i)))
+                    passed = true;
+                else break;
+            }
+
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if on hovering on info icons a tooltip appears",
+                    "Correct tooltips appears",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if on hovering on info icons a tooltip appears",
+                    "Incorrect tooltips appears",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+
+    @And("Click on {string} button for directing to home page")
+    public void clickOnButtonForDirectingToHomePage(String btnName) {
+        passed = false;
+        try {
+            DriverAction.waitSec(1);
+            if(DriverAction.getElementText(locator.backButton).equalsIgnoreCase(btnName)){
+                DriverAction.click(locator.backButton);
+                passed=true;
+            }
+
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Click on "+btnName+" button",
+                    "Clicked on "+btnName+" button",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Click on \"+btnName+\" button",
+                    "Unable to click on "+btnName+" button",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @Then("Verify if user goes back to dialogue box home page")
+    public void verifyIfUserGoesBackToDialogueBoxHomePage() {
     }
 }
