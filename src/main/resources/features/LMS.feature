@@ -29,11 +29,11 @@ Feature:LMS
 #    Then Verify if on hovering on first three displayed names, tooltip "<tooltip1>", "<tooltip2>" and "<tooltip3>" is visible
 #    And Verify if user data is displayed at the end on the dialogue box with respective "<rank>", "<dp>", "<userName>" and "<points>"
 #    Then Verify if "<button>" is present
-#    And Click on "<button>" button
+    And Click on "<button>" button
 #    Then Verify if "<button>" dialogue box appears
 #  And Verify if on hovering on few points, tooltip "<tooltip4>" and "<tooltip5>" is visible
-#  And Click on "<back>" button for directing to home page
-    Then Verify if user goes back to dialogue box home page
+  And Click on "<back>" button for directing to home page
+    Then Verify if user goes back to "<title>" box home page
     Examples:
       | title       | points1 | levels | badges | certificates | displayedNames | rank | dp | points | tooltip1 | tooltip2 | tooltip3 | userName         | button                | text                                                                                                                                                                                                                                                                                                                                         | tooltip4                 | tooltip5                       | back |
       | Leaderboard | Points  | Levels | Badges | Certificates | 101            | Rank | DP | Points | 1st      | 2nd      | 3rd      | Himanshu Panchal | How to collect points | Each login gives 1 point;Each unit completion gives 5 points;Each course completion gives 20 points;Each certificate gives 20 points;Each successful test completion gives 20 points;Each successful assignment completion gives 10 points;Each discussion topic or comment gives 5 points;Each upvote on discussion comments gives 1 point; | multiplied by test score | multiplied by assignment grade | back |

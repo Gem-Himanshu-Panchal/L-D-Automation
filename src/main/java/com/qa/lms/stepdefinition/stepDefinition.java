@@ -582,7 +582,23 @@ public class stepDefinition {
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
-    @Then("Verify if user goes back to dialogue box home page")
-    public void verifyIfUserGoesBackToDialogueBoxHomePage() {
+    @Then("Verify if user goes back to {string} box home page")
+    public void verifyIfUserGoesBackToBoxHomePage(String title) {
+        passed=false;
+        try{
+            if (DriverAction.isExist(locator.pointsDialogueBox) &&
+                    title.trim().equalsIgnoreCase(DriverAction.getElementText(locator.pointsHeader).trim()))
+                passed = true;
+        }catch (Exception ex){
+            passed=false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if user goes back to "+title+" page",
+                    "User is on "+title+" page",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if user goes back to \"+title+\" page",
+                    "Unable to go back to "+title+" page",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }
