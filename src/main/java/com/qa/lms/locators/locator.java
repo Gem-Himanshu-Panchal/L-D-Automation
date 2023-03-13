@@ -63,7 +63,7 @@ public class locator {
     public static By userRank = By.xpath("//div[@class='tl-gamification-my-list']//div[@class='tl-ranking-number']");
     public static By userDp = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']//img");
 
-    public static By currentUserName = By.ByName.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
+    public static By currentUserName = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
     public static By currentUserPoints = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points tl-gamification-points-tab']");
     public static By button(String text){
         switch (text){
