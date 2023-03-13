@@ -91,11 +91,13 @@ public static By pointsBtn(String text){
     switch (text){
         case "Levels": return By.xpath("//a[contains(text(),\"Levels\")]");
         case "Badges": return By.xpath("//a[contains(text(),\"Badges\")]");
+        case "Certificates": return By.xpath("//a[contains(text(),\"Certificates\")]");
         default:return null;
     }
 }
 
 public static  By playIcon = By.xpath("//i[@class='icon-play tl-icon15']");
 public static By badges = By.xpath("//div[@id='tl-userbadges-images']//img");
+public static By cetificatesCount = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points']");
 }
 

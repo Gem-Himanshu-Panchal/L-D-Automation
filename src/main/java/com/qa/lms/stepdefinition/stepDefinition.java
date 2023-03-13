@@ -371,7 +371,7 @@ public class stepDefinition {
             List<WebElement> dpList = DriverAction.getElements(locator.dp);
             List<WebElement> nameList = DriverAction.getElements(locator.userName);
             List<WebElement> pointsList = DriverAction.getElements(locator.points);
-            if (rankList.size() == count && dpList.size() == count && nameList.size() == count && pointsList.size() == count - 1)
+            if (rankList.size() == count && dpList.size() == count && nameList.size() == count && pointsList.size() == count)
                 passed = true;
 
         } catch (Exception ex) {
@@ -430,7 +430,7 @@ public class stepDefinition {
                 if (DriverAction.isExist(locator.userRank)) {
                     if (DriverAction.isExist(locator.userDp)) {
                         if (DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)) {
-                            if (DriverAction.isExist(locator.currentUserPoints)) {
+                            if (DriverAction.isExist(locator.cetificatesCount)) {
                                 passed = true;
                             } else {
                                 passed = false;
@@ -784,28 +784,27 @@ public class stepDefinition {
 
     @And("Click on {string} button and verify if badges detail page is displayed")
     public void clickOnButtonAndVerifyIfBadgesDetailPageIsDisplayed(String playIcon) {
-        passed=false;
-        try{
+        passed = false;
+        try {
             DriverAction.waitSec(3);
             List<WebElement> pointsElements = DriverAction.getElements(locator.points);
 
             List<WebElement> li = DriverAction.getElements(locator.playIcon);
-            for(int i=0;i< pointsElements.size();i++){
+            for (int i = 0; i < pointsElements.size(); i++) {
                 int count = Integer.parseInt(pointsElements.get(i).getText());
 
-                if(li.get(i).isDisplayed()){
+                if (li.get(i).isDisplayed()) {
                     li.get(i).click();
 
-                    List<WebElement> badgesCount =  DriverAction.getElements(locator.badges);
-                    if(DriverAction.isExist(locator.badges) && badgesCount.size()==count){
-                        passed=true;
+                    List<WebElement> badgesCount = DriverAction.getElements(locator.badges);
+                    if (DriverAction.isExist(locator.badges) && badgesCount.size() == count) {
+                        passed = true;
                         DriverAction.getElement(locator.backButton).click();
-                    }
-                    else break;
-                }else break;
+                    } else break;
+                } else break;
             }
-        }catch (Exception ex){
-            passed=false;
+        } catch (Exception ex) {
+            passed = false;
         }
         if (passed)
             GemTestReporter.addTestStep("Click on Play button to view badges",
@@ -819,21 +818,21 @@ public class stepDefinition {
 
     @And("Click on {string} button for current user and verify if badges detail page is displayed")
     public void clickOnButtonForCurrentUserAndVerifyIfBadgesDetailPageIsDisplayed(String arg0) {
-        passed=false;
-        try{
+        passed = false;
+        try {
             DriverAction.waitSec(3);
 
             List<WebElement> li = DriverAction.getElements(locator.playIcon);
             int point = Integer.parseInt(DriverAction.getElementText(locator.currentUserBadgePoint));
-            li.get(li.size()-1).click();
+            li.get(li.size() - 1).click();
 
-                    List<WebElement> badgesCount =  DriverAction.getElements(locator.badges);
-                    if(DriverAction.isExist(locator.badges) && badgesCount.size()==point){
-                        passed=true;
-                        DriverAction.getElement(locator.backButton).click();
-                    }
-        }catch (Exception ex){
-            passed=false;
+            List<WebElement> badgesCount = DriverAction.getElements(locator.badges);
+            if (DriverAction.isExist(locator.badges) && badgesCount.size() == point) {
+                passed = true;
+                DriverAction.getElement(locator.backButton).click();
+            }
+        } catch (Exception ex) {
+            passed = false;
         }
         if (passed)
             GemTestReporter.addTestStep("Click on Play button to view badges for current user",

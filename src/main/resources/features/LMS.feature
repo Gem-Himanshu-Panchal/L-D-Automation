@@ -57,21 +57,30 @@ Feature:LMS
       | Levels | 101            | Rank | DP | Himanshu Panchal | How to level up | Leaderboard | Upgrade level every 3000 points;Upgrade level every 5 completed courses;Upgrade level every 5 badges | Back |
 
 
+  Scenario Outline: Verify functionality of Badges icon
+    Given Click on points icon
+    And Click on "<badges>" button present on navbar
+    Then Verify if "<badges>" page is open
+    Then Verify "<displayedNames>" names are displayed inside the dialogue box
+    And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<playIcon>" for "<displayedNames>"
+    Then Verify if "<playIcon>" is present for displayed names for "<displayedNames>"
+    And Verify if user data is displayed at the end on Badges page with respective "<rank>", "<dp>", "<userName>", "<points>" and "<playIcon>"
+    And Click on "<playIcon>" button and verify if badges detail page is displayed
+    And Click on "<playIcon>" button for current user and verify if badges detail page is displayed
+    Examples:
+      | badges | displayedNames | rank | dp | userName         | playIcon | points |
+      | Badges | 101            | Rank | DP | Himanshu Panchal | PlayIcon | Points |
 
-Scenario Outline: Verify functionality of Badges icon
+Scenario Outline: Verify Certificates functionality
   Given Click on points icon
-  And Click on "<badges>" button present on navbar
-  Then Verify if "<badges>" page is open
+  And Click on "<certificates>" button present on navbar
+  Then Verify if "<certificates>" page is open
   Then Verify "<displayedNames>" names are displayed inside the dialogue box
-  And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<playIcon>" for "<displayedNames>"
-  Then Verify if "<playIcon>" is present for displayed names for "<displayedNames>"
-  And Verify if user data is displayed at the end on Badges page with respective "<rank>", "<dp>", "<userName>", "<points>" and "<playIcon>"
-  And Click on "<playIcon>" button and verify if badges detail page is displayed
-  And Click on "<playIcon>" button for current user and verify if badges detail page is displayed
+  And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<points>" for "<displayedNames>"
+  And Verify if user data is displayed at the end on the dialogue box with respective "<rank>", "<dp>", "<userName>" and "<points>"
   Examples:
-    | badges | displayedNames | rank | dp | userName         | playIcon | points |
-    | Badges | 101            | Rank | DP | Himanshu Panchal | PlayIcon | Points |
-
+    | certificates | displayedNames | rank | dp | userName         | points |
+    | Certificates | 101            | Rank | DP | Himanshu Panchal | Points |
 
 
 
