@@ -511,7 +511,7 @@ public class stepDefinition {
         passed = false;
         try {
             if (DriverAction.getElementText(locator.howToCollectPointsHeader).equalsIgnoreCase(text) &&
-                   DriverAction.isExist(locator.backButton)) {
+                    DriverAction.isExist(locator.backButton)) {
                 passed = true;
             }
         } catch (Exception ex) {
@@ -607,23 +607,22 @@ public class stepDefinition {
         try {
             String[] lines = text.split(";");
             List<WebElement> presentLines = DriverAction.getElements(locator.getHowToCollectPointsLists(lines.length));
-            if(presentLines.size()==lines.length) {
+            if (presentLines.size() == lines.length) {
                 for (int i = 0; i < countOfLines; i++) {
                     if (presentLines.get(i).isDisplayed() && presentLines.get(i).getText().equalsIgnoreCase(lines[i]))
                         passed = true;
                     else break;
                 }
-            }
-            else passed=false;
+            } else passed = false;
         } catch (Exception ex) {
             passed = false;
         }
         if (passed)
-            GemTestReporter.addTestStep("Verify if "+countOfLines+" lines are present on Points page",
+            GemTestReporter.addTestStep("Verify if " + countOfLines + " lines are present on Points page",
                     "Lines are present",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if "+countOfLines+" lines are present on Points page",
+            GemTestReporter.addTestStep("Verify if " + countOfLines + " lines are present on Points page",
                     "Lines are missing",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
@@ -667,7 +666,7 @@ public class stepDefinition {
         passed = false;
         try {
             DriverAction.waitSec(1);
-            DriverAction.click(locator.levelButton);
+            DriverAction.click(locator.pointsBtn(text));
             passed = true;
         } catch (Exception ex) {
             passed = false;
@@ -688,7 +687,7 @@ public class stepDefinition {
         try {
             DriverAction.waitSec(2);
             if (DriverAction.isExist(locator.isLevelSelected) &&
-                    DriverAction.getElementText(locator.levelButton).trim().equalsIgnoreCase(text))
+                    DriverAction.getElementText(locator.pointsBtn(text)).trim().equalsIgnoreCase(text))
                 passed = true;
         } catch (Exception ex) {
             passed = false;
@@ -725,4 +724,60 @@ public class stepDefinition {
     }
 
 
+    @Then("Verify if {string} is present for displayed names for {string}")
+    public void verifyIfIsPresentForDisplayedNames(String playicon, String cont) {
+        passed = false;
+        try {
+            List<WebElement> playIcons = DriverAction.getElements(locator.playIcon);
+            int contactsCount = Integer.parseInt(cont);
+            if (playIcons.size() == contactsCount)
+                passed = true;
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if play icon is present for all the contacts resent in Badges tab",
+                    "Play icon are present",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if play icon is present for all the contacts resent in Badges tab",
+                    "Play icon is missing",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Verify if user data is displayed at the end on Badges page with respective {string}, {string}, {string}, {string} and {string}")
+    public void verifyIfUserDataIsDisplayedAtTheEndOnBadgesPageWithRespectiveAnd(String rank, String dp, String name, String points, String playIcon) {
+        passed = false;
+        String missingData = "";
+        boolean isRowDisplayed = false;
+        try {
+            isRowDisplayed = DriverAction.isExist(locator.userRow);
+            if (isRowDisplayed) {
+                if (DriverAction.isExist(locator.userRankBadges)) {
+                    if (DriverAction.isExist(locator.userDp)) {
+                        if (DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)) {
+                            if (DriverAction.isExist(locator.currentUserBadgePoint)) {
+                                if (DriverAction.isExist(locator.playIcon)) {
+                                    passed = true;
+                                } else {
+                                    passed = false;
+                                    missingData = playIcon;
+                                }
+                            } else missingData = points;
+                        } else missingData = name;
+                    } else missingData = dp;
+                } else missingData = rank;
+            }
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if current user data is displayed",
+                    "Current user data is displayed",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if current user data is displayed",
+                    missingData + " is missing from Levels page",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
 }

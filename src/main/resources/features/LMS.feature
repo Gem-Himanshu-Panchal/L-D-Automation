@@ -58,8 +58,17 @@ Feature:LMS
 
 
 
-
-
+Scenario Outline: Verify functionality of Badges icon
+  Given Click on points icon
+  And Click on "<badges>" button present on navbar
+  Then Verify if "<badges>" page is open
+  Then Verify "<displayedNames>" names are displayed inside the dialogue box
+  And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<playIcon>" for "<displayedNames>"
+  Then Verify if "<playIcon>" is present for displayed names for "<displayedNames>"
+  And Verify if user data is displayed at the end on Badges page with respective "<rank>", "<dp>", "<userName>", "<points>" and "<playIcon>"
+  Examples:
+    | badges | displayedNames | rank | dp | userName         | playIcon | points |
+    | Badges | 101            | Rank | DP | Himanshu Panchal | PlayIcon | Points |
 
 
 
