@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 
+import java.awt.peer.TextAreaPeer;
 import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
@@ -279,13 +280,13 @@ public class stepDefinition {
         } catch (Exception ex) {
             passed = false;
         }
-        if (passed)
-            GemTestReporter.addTestStep("Click on Points button",
-                    "Successfully clicked on points button",
-                    STATUS.PASS, DriverAction.takeSnapShot());
-        else
-            GemTestReporter.addTestStep("Click on Points button",
-                    "Unable to click on points button", STATUS.FAIL, DriverAction.takeSnapShot());
+//        if (passed)
+//            GemTestReporter.addTestStep("Click on Points button",
+//                    "Successfully clicked on points button",
+//                    STATUS.PASS, DriverAction.takeSnapShot());
+//        else
+//            GemTestReporter.addTestStep("Click on Points button",
+//                    "Unable to click on points button", STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
     @Then("Verify if a dialogue box with {string} appears")
@@ -671,14 +672,14 @@ public class stepDefinition {
         } catch (Exception ex) {
             passed = false;
         }
-        if (passed)
-            GemTestReporter.addTestStep("Click on " + text + " button",
-                    "Successfully clicked on " + text + " button",
-                    STATUS.PASS, DriverAction.takeSnapShot());
-        else
-            GemTestReporter.addTestStep("Click on " + text + " button",
-                    "Unable to click on " + text + " button",
-                    STATUS.FAIL, DriverAction.takeSnapShot());
+//        if (passed)
+//            GemTestReporter.addTestStep("Click on " + text + " button",
+//                    "Successfully clicked on " + text + " button",
+//                    STATUS.PASS, DriverAction.takeSnapShot());
+//        else
+//            GemTestReporter.addTestStep("Click on " + text + " button",
+//                    "Unable to click on " + text + " button",
+//                    STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
     @Then("Verify if {string} page is open")
@@ -778,6 +779,69 @@ public class stepDefinition {
         else
             GemTestReporter.addTestStep("Verify if current user data is displayed",
                     missingData + " is missing from Levels page",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Click on {string} button and verify if badges detail page is displayed")
+    public void clickOnButtonAndVerifyIfBadgesDetailPageIsDisplayed(String playIcon) {
+        passed=false;
+        try{
+            DriverAction.waitSec(3);
+            List<WebElement> pointsElements = DriverAction.getElements(locator.points);
+
+            List<WebElement> li = DriverAction.getElements(locator.playIcon);
+            for(int i=0;i< pointsElements.size();i++){
+                int count = Integer.parseInt(pointsElements.get(i).getText());
+
+                if(li.get(i).isDisplayed()){
+                    li.get(i).click();
+
+                    List<WebElement> badgesCount =  DriverAction.getElements(locator.badges);
+                    if(DriverAction.isExist(locator.badges) && badgesCount.size()==count){
+                        passed=true;
+                        DriverAction.getElement(locator.backButton).click();
+                    }
+                    else break;
+                }else break;
+            }
+        }catch (Exception ex){
+            passed=false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Click on Play button to view badges",
+                    "Successfully clicked on Play button",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Click on Play button to view badges",
+                    "Unable to click on Play button",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Click on {string} button for current user and verify if badges detail page is displayed")
+    public void clickOnButtonForCurrentUserAndVerifyIfBadgesDetailPageIsDisplayed(String arg0) {
+        passed=false;
+        try{
+            DriverAction.waitSec(3);
+
+            List<WebElement> li = DriverAction.getElements(locator.playIcon);
+            int point = Integer.parseInt(DriverAction.getElementText(locator.currentUserBadgePoint));
+            li.get(li.size()-1).click();
+
+                    List<WebElement> badgesCount =  DriverAction.getElements(locator.badges);
+                    if(DriverAction.isExist(locator.badges) && badgesCount.size()==point){
+                        passed=true;
+                        DriverAction.getElement(locator.backButton).click();
+                    }
+        }catch (Exception ex){
+            passed=false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Click on Play button to view badges for current user",
+                    "Successfully clicked on Play button",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Click on Play button to view badges for current user",
+                    "Unable to click on Play button",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }

@@ -66,6 +66,8 @@ Scenario Outline: Verify functionality of Badges icon
   And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<playIcon>" for "<displayedNames>"
   Then Verify if "<playIcon>" is present for displayed names for "<displayedNames>"
   And Verify if user data is displayed at the end on Badges page with respective "<rank>", "<dp>", "<userName>", "<points>" and "<playIcon>"
+  And Click on "<playIcon>" button and verify if badges detail page is displayed
+  And Click on "<playIcon>" button for current user and verify if badges detail page is displayed
   Examples:
     | badges | displayedNames | rank | dp | userName         | playIcon | points |
     | Badges | 101            | Rank | DP | Himanshu Panchal | PlayIcon | Points |

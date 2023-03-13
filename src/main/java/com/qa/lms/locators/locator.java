@@ -96,5 +96,6 @@ public static By pointsBtn(String text){
 }
 
 public static  By playIcon = By.xpath("//i[@class='icon-play tl-icon15']");
+public static By badges = By.xpath("//div[@id='tl-userbadges-images']//img");
 }
 
