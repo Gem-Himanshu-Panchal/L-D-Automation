@@ -18,9 +18,9 @@ public class locator {
     public static By messageText = By.xpath("//li[@id='tl-dropdown-messages']//a");
     public static By messageDropdown = By.xpath("//li[@id='tl-dropdown-messages']//ul[@class='dropdown-menu']//li//a");
     public static By userRankLevels = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-ranking-align']//img");
-    public static By currentUserLevel=  By.xpath("//td[@class='tl-gamification-points tl-gamification-levels']");
+    public static By currentUserLevel = By.xpath("//td[@class='tl-gamification-points tl-gamification-levels']");
     public static By currentUserBadgePoint = By.xpath("//td[@class='tl-gamification-points ']");
-    public static By userRankBadges= By.xpath("//div[@class='tl-gamification-my-list']//div[@class='tl-ranking-number']");
+    public static By userRankBadges = By.xpath("//div[@class='tl-gamification-my-list']//div[@class='tl-ranking-number']");
 
     public static By fun(String text) {
         switch (text) {
@@ -67,37 +67,52 @@ public class locator {
 
     public static By currentUserName = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-user']");
     public static By currentUserPoints = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points tl-gamification-points-tab']");
-    public static By button(String text){
-        switch (text){
-            case "How to collect points": return By.xpath("//a[contains(text(),'How to collect points')]");
-            case "How to level up":return By.xpath("//a[contains(text(),'How to level up')]");
-            default:return null;
+
+    public static By button(String text) {
+        switch (text) {
+            case "How to collect points":
+                return By.xpath("//a[contains(text(),'How to collect points')]");
+            case "How to level up":
+                return By.xpath("//a[contains(text(),'How to level up')]");
+            default:
+                return null;
         }
     }
+
     public static By howToCollectPointsHeader = By.xpath("//h3[text()='How to collect points']");
-    public static By getHowToCollectPointsLists(int num){
-        switch (num){
-            case 8: return By.xpath("//ul[@id='tl-get-points-conditions']//li");
-            case 3: return By.xpath("//ul[@id='tl-upgrade-levels-conditions']//li");
-            default:return By.xpath("");
+
+    public static By getHowToCollectPointsLists(int num) {
+        switch (num) {
+            case 8:
+                return By.xpath("//ul[@id='tl-get-points-conditions']//li");
+            case 3:
+                return By.xpath("//ul[@id='tl-upgrade-levels-conditions']//li");
+            default:
+                return By.xpath("");
         }
     }
+
     public static By backButton = By.xpath("//a[@class='btn']//span");
     public static By infoIcon = By.xpath("//li[@class='tl-bold-item']//i[@class='icon-info-circle tl-info-icon']");
     public static By hoverIcon = By.xpath("//div[@class='tooltip fade right in']");
 
-public static  By isLevelSelected = By.xpath("//li[@class='hide active']");
-public static By pointsBtn(String text){
-    switch (text){
-        case "Levels": return By.xpath("//a[contains(text(),\"Levels\")]");
-        case "Badges": return By.xpath("//a[contains(text(),\"Badges\")]");
-        case "Certificates": return By.xpath("//a[contains(text(),\"Certificates\")]");
-        default:return null;
-    }
-}
+    public static By isLevelSelected = By.xpath("//li[@class='hide active']");
 
-public static  By playIcon = By.xpath("//i[@class='icon-play tl-icon15']");
-public static By badges = By.xpath("//div[@id='tl-userbadges-images']//img");
-public static By cetificatesCount = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points']");
+    public static By pointsBtn(String text) {
+        switch (text) {
+            case "Levels":
+                return By.xpath("//a[contains(text(),\"Levels\")]");
+            case "Badges":
+                return By.xpath("//a[contains(text(),\"Badges\")]");
+            case "Certificates":
+                return By.xpath("//a[contains(text(),\"Certificates\")]");
+            default:
+                return null;
+        }
+    }
+
+    public static By playIcon = By.xpath("//i[@class='icon-play tl-icon15']");
+    public static By badges = By.xpath("//div[@id='tl-userbadges-images']//img");
+    public static By cetificatesCount = By.xpath("//div[@class='tl-gamification-my-list']//td[@class='tl-gamification-points']");
 }
 

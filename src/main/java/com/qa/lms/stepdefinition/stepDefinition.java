@@ -346,6 +346,7 @@ public class stepDefinition {
     public void verifyNamesAreDisplayedInsideTheDialogueBox(String countOfNames) {
         passed = false;
         try {
+            DriverAction.waitSec(3);
             int count = Integer.parseInt(countOfNames);
             List<WebElement> list = DriverAction.getElements(locator.countPointDialogueBox);
             if (list.size() == count)
@@ -363,27 +364,36 @@ public class stepDefinition {
     }
 
     @And("Verify if all displayed names have {string}, {string}, {string} and {string} for {string}")
-    public void verifyIfAllDisplayedNamesHaveAnd(String rank, String dp, String name, String points, String countOfNames) {
+    public void verifyIfAllDisplayedNamesHaveAnd(String rank, String dp, String name, String certificates, String countOfNames) {
         passed = false;
+        String missingColumn = "";
         try {
+            DriverAction.waitSec(3);
             int count = Integer.parseInt(countOfNames);
             List<WebElement> rankList = DriverAction.getElements(locator.rank);
             List<WebElement> dpList = DriverAction.getElements(locator.dp);
             List<WebElement> nameList = DriverAction.getElements(locator.userName);
             List<WebElement> pointsList = DriverAction.getElements(locator.points);
-            if (rankList.size() == count && dpList.size() == count && nameList.size() == count && pointsList.size() == count)
-                passed = true;
 
+            if (rankList.size() == count){
+                if( dpList.size() == count ){
+                    if( nameList.size() == count){
+                        if(pointsList.size() <= count){
+                            passed=true;
+                        }missingColumn = certificates;
+                    }else missingColumn= name;
+                }else missingColumn = dp;
+            }else missingColumn = rank;
         } catch (Exception ex) {
             passed = false;
         }
         if (passed)
-            GemTestReporter.addTestStep("Verify if " + rank + ", " + dp + ", " + name + " and " + points + " are visible in points dialogue box",
+            GemTestReporter.addTestStep("Verify if " + rank + ", " + dp + ", " + name + " and " + certificates + " are visible in points dialogue box",
                     "Displayed names have mentioned columns",
                     STATUS.PASS, DriverAction.takeSnapShot());
         else
-            GemTestReporter.addTestStep("Verify if " + rank + ", " + dp + ", " + name + " and " + points + " are visible in points dialogue box",
-                    "Displayed names have missing columns", STATUS.FAIL, DriverAction.takeSnapShot());
+            GemTestReporter.addTestStep("Verify if " + rank + ", " + dp + ", " + name + " and " + certificates + " are visible in points dialogue box",
+                    "Displayed names have missing columns: "+missingColumn, STATUS.FAIL, DriverAction.takeSnapShot());
     }
 
     @Then("Verify if on hovering on first three displayed names, tooltip {string}, {string} and {string} is visible")
@@ -430,7 +440,7 @@ public class stepDefinition {
                 if (DriverAction.isExist(locator.userRank)) {
                     if (DriverAction.isExist(locator.userDp)) {
                         if (DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)) {
-                            if (DriverAction.isExist(locator.cetificatesCount)) {
+                            if (DriverAction.isExist(locator.currentUserPoints)) {
                                 passed = true;
                             } else {
                                 passed = false;
@@ -708,6 +718,7 @@ public class stepDefinition {
     public void verifyIfHowToLevelUpPageOpens() {
         passed = false;
         try {
+            DriverAction.waitSec(2);
             if (DriverAction.isExist(locator.pointsHeader) && DriverAction.getElementText(locator.pointsHeader).trim()
                     .equalsIgnoreCase("How to level up"))
                 passed = true;
@@ -825,10 +836,10 @@ public class stepDefinition {
             List<WebElement> li = DriverAction.getElements(locator.playIcon);
             int point = Integer.parseInt(DriverAction.getElementText(locator.currentUserBadgePoint));
             li.get(li.size() - 1).click();
-
             List<WebElement> badgesCount = DriverAction.getElements(locator.badges);
             if (DriverAction.isExist(locator.badges) && badgesCount.size() == point) {
                 passed = true;
+               if(DriverAction.isExist(locator.backButton))
                 DriverAction.getElement(locator.backButton).click();
             }
         } catch (Exception ex) {
@@ -841,6 +852,37 @@ public class stepDefinition {
         else
             GemTestReporter.addTestStep("Click on Play button to view badges for current user",
                     "Unable to click on Play button",
+                    STATUS.FAIL, DriverAction.takeSnapShot());
+    }
+
+    @And("Verify if user data is displayed at the end on the dialogue box for certificates tab with respective {string}, {string}, {string} and {string}")
+    public void verifyIfUserDataIsDisplayedAtTheEndOnTheDialogueBoxForCertificatesTabWithRespectiveAnd(String rank, String dp, String name, String certificates) {
+        passed = false;
+        String missingData = "";
+        boolean isRowDisplayed = false;
+        try {
+            isRowDisplayed = DriverAction.isExist(locator.userRow);
+            if (isRowDisplayed) {
+                if (DriverAction.isExist(locator.userRankBadges)) {
+                    if (DriverAction.isExist(locator.userDp)) {
+                        if (DriverAction.isExist(locator.currentUserName) && DriverAction.getElementText(locator.currentUserName).equalsIgnoreCase(name)) {
+                            if (DriverAction.isExist(locator.cetificatesCount)) {
+                                passed = true;
+                            } else missingData = certificates;
+                        } else missingData = name;
+                    } else missingData = dp;
+                } else missingData = rank;
+            }
+        } catch (Exception ex) {
+            passed = false;
+        }
+        if (passed)
+            GemTestReporter.addTestStep("Verify if current user data is displayed",
+                    "Current user data is displayed",
+                    STATUS.PASS, DriverAction.takeSnapShot());
+        else
+            GemTestReporter.addTestStep("Verify if current user data is displayed",
+                    missingData + " is missing from Levels page",
                     STATUS.FAIL, DriverAction.takeSnapShot());
     }
 }

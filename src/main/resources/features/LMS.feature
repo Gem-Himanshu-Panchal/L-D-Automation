@@ -71,16 +71,16 @@ Feature:LMS
       | badges | displayedNames | rank | dp | userName         | playIcon | points |
       | Badges | 101            | Rank | DP | Himanshu Panchal | PlayIcon | Points |
 
-Scenario Outline: Verify Certificates functionality
-  Given Click on points icon
-  And Click on "<certificates>" button present on navbar
-  Then Verify if "<certificates>" page is open
-  Then Verify "<displayedNames>" names are displayed inside the dialogue box
-  And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<points>" for "<displayedNames>"
-  And Verify if user data is displayed at the end on the dialogue box with respective "<rank>", "<dp>", "<userName>" and "<points>"
-  Examples:
-    | certificates | displayedNames | rank | dp | userName         | points |
-    | Certificates | 101            | Rank | DP | Himanshu Panchal | Points |
+  Scenario Outline: Verify Certificates functionality
+    Given Click on points icon
+    And Click on "<certificates>" button present on navbar
+    Then Verify if "<certificates>" page is open
+    Then Verify "<displayedNames>" names are displayed inside the dialogue box
+    And Verify if all displayed names have "<rank>", "<dp>", "<userName>" and "<certificates>" for "<displayedNames>"
+    And Verify if user data is displayed at the end on the dialogue box for certificates tab with respective "<rank>", "<dp>", "<userName>" and "<certificates>"
+    Examples:
+      | certificates | displayedNames | rank | dp | userName         | certificates |
+      | Certificates | 101            | Rank | DP | Himanshu Panchal | Certificates |
 
 
 
